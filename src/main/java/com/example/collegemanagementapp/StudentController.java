@@ -1,5 +1,6 @@
 package com.example.collegemanagementapp;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -7,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class StudentController {
 
-    StudentService studentService=new StudentService();
+    @Autowired
+    StudentService studentService;
 
     @PostMapping("/student/add")
     public String addStudent(@RequestBody Student student){
@@ -19,7 +21,7 @@ public class StudentController {
         return studentService.getStudent(id);
     }
 
-    @GetMapping("/student/get/{name}/{q}")
+    @GetMapping("/student/get/{name}")
     public Student getStudentByName(@PathVariable("name") String name){
         return studentService.getStudentByName(name);
     }
